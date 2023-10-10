@@ -1,14 +1,32 @@
 #!/usr/bin/python3
-from models.base_model import BaseModel
+"""
+import modules
+"""
 
-my_model = BaseModel()
-my_model.name = "My First Model"
-my_model.my_number = 89
-print(my_model)
-my_model.save()
-print(my_model)
-my_model_json = my_model.to_dict()
-print(my_model_json)
-print("JSON of my_model:")
-for key in my_model_json.keys():
-    print("\t{}: ({}) - {}".format(key, type(my_model_json[key]), my_model_json[key]))
+from models.base_model import BaseModel
+import unittest
+from datetime import datetime
+from uuid import UUID
+
+
+class TestBaseModel(unittest.TestCase):
+    """
+    parent class module to test for various instances
+    of class basemodel
+    """
+    def test_id_length(self):
+        """
+        test length
+        """
+        obj = BaseModel()
+        self.assertEqual(len(obj.id), 36)
+
+    def test_id_type(self):
+        """
+        test type
+        """
+        obj = BaseModel()
+        self.assertIs(type(obj.id), str)
+
+if __name__ == "__main__":
+    unittest.main()
