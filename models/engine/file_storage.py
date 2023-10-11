@@ -6,7 +6,6 @@ import json
 from models.base_model import BaseModel
 
 
-
 class FileStorage:
     """
     parent class module that assigns storage
