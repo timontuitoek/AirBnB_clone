@@ -28,5 +28,28 @@ class TestBaseModel(unittest.TestCase):
         obj = BaseModel()
         self.assertIs(type(obj.id), str)
 
+    def test_created_at_type(self):
+        """
+        test type
+        """
+        obj = BaseModel()
+        self.assertIs(type(obj.created_at), datetime)
+
+    def test_updated_at_type(self):
+        """
+        test type
+        """
+        obj = BaseModel()
+        self.assertIs(type(obj.updated_at), datetime)
+
+    def test_to_dict_type(self):
+        """
+        test type
+        """
+        obj = BaseModel()
+        to_dict_dict = obj.to_dict()
+        self.assertIn("__class__", to_dict_dict)
+        self.assertIs(type(to_dict_dict["__class__"]), str)
+
 if __name__ == "__main__":
     unittest.main()
