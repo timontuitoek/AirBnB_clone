@@ -44,12 +44,11 @@ class BaseModel:
         return dictionary containing all keys/values of __dict__
         """
         class_name = self.__class__.__name__
-        return {
-                "__class__": class_name,
-                "id": self.id,
-                "created_at": self.created_at.isoformat(),
-                "updated_at": self.updated_at.isoformat()
-                }
+        attributes = self.__dict__.copy()
+        attributes['__class__'] = class_name
+        attributes['created_at'] = self.created_at.isoformat()
+        attributes['updated_at'] = self.updated_at.isoformat()
+        return attributes
 
     def __str__(self):
         """

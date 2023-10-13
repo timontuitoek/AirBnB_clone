@@ -4,6 +4,7 @@ import module
 """
 import json
 from models.base_model import BaseModel
+from os import path
 
 
 class FileStorage:
@@ -28,13 +29,8 @@ class FileStorage:
             json.dump(data, file)
 
     def reload(self):
-        try:
-            with open(FileStorage.__file_path, 'r') as file:
-                data = json.load(file)
-                for key, value in data.items():
-                    class_name, obj_id = key.split('.')
-                    cls = class_name_to_cls[class_name]
-                    instance = cls(**value)
-                    self.new(instance)
-        except FileNotFoundError:
-            pass
+        if path.exists(self.__file_path):
+            with open(self.__file_path, mode='r', encoding='utf-8') as f:
+                json_dict = json.loads(f.read())
+                for k, v in json_dict.items():
+                    self.__objects[k] = eval(v['__class__'])(**v)
