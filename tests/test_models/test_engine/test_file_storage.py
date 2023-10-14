@@ -10,6 +10,7 @@ import os
 import json
 import uuid
 
+
 class TestFileStorage(unittest.TestCase):
     """
     parent class module for test cases
@@ -104,7 +105,6 @@ class TestFileStorage(unittest.TestCase):
         objects = storage._FileStorage__objects
 
         self.assertIn("BaseModel.{}".format(base_model.id), objects)
-
 
 
 if __name__ == "__main__":
