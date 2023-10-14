@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-import modules
+module docs
 """
 
 import models
