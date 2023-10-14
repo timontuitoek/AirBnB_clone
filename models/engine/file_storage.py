@@ -18,13 +18,6 @@ class FileStorage:
     """
     parent class module that assigns storage
     """
-    "BaseModel": BaseModel,
-    "State": State,
-    "City": City,
-    "Amenity": Amenity,
-    "Place": Place,
-    "Review": Review,
-    "User": User,
     __file_path = "file.json"
     __objects = {}
 
@@ -58,5 +51,5 @@ class FileStorage:
         if path.exists(self.__file_path):
             with open(self.__file_path, mode='r', encoding='utf-8') as f:
                 json_dict = json.loads(f.read())
-                for k, v in json_dict.items():
-                    self.__objects[k] = eval(v['__class__'])(**v)
+                for key, value in json_dict.items():
+                    self.__objects[key] = eval(value['__class__'])(**value)
