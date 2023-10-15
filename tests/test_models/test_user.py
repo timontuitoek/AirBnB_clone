@@ -15,7 +15,7 @@ class TestUser(unittest.TestCase):
     """
     def test_modulesDocs(self):
         """
-        test_docs
+        tests modules documents
         """
         moduleDoc = (
                 __import__("models.user")
@@ -23,18 +23,18 @@ class TestUser(unittest.TestCase):
         self.assertGreater(len(moduleDoc), 0)
 
     def test_classDocs(self):
-        '''
-        Docs
-        '''
+        """
+        test class documents
+        """
         classDoc = (
                 __import__("models.user")
                 .user.User.__doc__)
         self.assertGreater(len(classDoc), 0)
 
     def test_attributes_Type(self):
-        '''
-        Docs
-        '''
+        """
+        test attributes type
+        """
         user = User()
         self.assertIs(type(user.email), str)
         self.assertIs(type(user.password), str)
