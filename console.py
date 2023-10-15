@@ -16,7 +16,7 @@ import models
 
 class HBNBCommand(cmd.Cmd):
     """
-    Class Doc
+    HBNB command
     """
     prompt = "(hbnb) "
 
@@ -43,33 +43,33 @@ class HBNBCommand(cmd.Cmd):
         do create
         """
         if len(arg) > 0:
-            args_array = arg.split()
-            if len(args_array) > 0:
-                if args_array[0] == "BaseModel":
+            lines = arg.split()
+            if len(lines) > 0:
+                if lines[0] == "BaseModel":
                     obj = BaseModel()
                     obj.save()
                     print(obj.id)
-                elif args_array[0] == "User":
+                elif lines[0] == "User":
                     obj = User()
                     obj.save()
                     print(obj.id)
-                elif args_array[0] == "State":
+                elif lines[0] == "State":
                     obj = State()
                     obj.save()
                     print(obj.id)
-                elif args_array[0] == "City":
+                elif lines[0] == "City":
                     obj = City()
                     obj.save()
                     print(obj.id)
-                elif args_array[0] == "Amenity":
+                elif lines[0] == "Amenity":
                     obj = Amenity()
                     obj.save()
                     print(obj.id)
-                elif args_array[0] == "Place":
+                elif lines[0] == "Place":
                     obj = Place()
                     obj.save()
                     print(obj.id)
-                elif args_array[0] == "Review":
+                elif lines[0] == "Review":
                     obj = Review()
                     obj.save()
                     print(obj.id)
@@ -86,14 +86,14 @@ class HBNBCommand(cmd.Cmd):
                 "BaseModel", "User", "State",
                 "City", "Amenity", "Place", "Review"]
         if len(arg) > 0:
-            args_array = arg.split()
-            if len(args_array) > 0:
-                class_name = args_array[0]
+            lines = arg.split()
+            if len(lines) > 0:
+                class_name = lines[0]
                 if class_name in allowed_classes:
-                    if len(args_array) > 1:
+                    if len(lines) > 1:
                         objs_dict = models.storage.all()
                         search_string = "{}.{}".format(
-                                class_name, args_array[1])
+                                class_name, lines[1])
                         if search_string in objs_dict:
                             print(objs_dict[search_string])
                         else:
@@ -113,14 +113,14 @@ class HBNBCommand(cmd.Cmd):
                 "BaseModel", "User", "State",
                 "City", "Amenity", "Place", "Review"]
         if len(arg) > 0:
-            args_array = arg.split()
-            if len(args_array) > 0:
-                class_name = args_array[0]
+            lines = arg.split()
+            if len(lines) > 0:
+                class_name = lines[0]
                 if class_name in allowed_classes:
-                    if len(args_array) > 1:
+                    if len(lines) > 1:
                         objs_dict = models.storage.all()
                         search_string = "{}.{}".format(
-                                class_name, args_array[1])
+                                class_name, lines[1])
                         if search_string in objs_dict:
                             del (objs_dict[search_string])
                             models.storage.save()
@@ -141,9 +141,9 @@ class HBNBCommand(cmd.Cmd):
                 "BaseModel", "User", "State",
                 "City", "Amenity", "Place", "Review"]
         if len(arg) > 0:
-            args_array = arg.split()
-            if len(args_array) > 0:
-                class_name = args_array[0]
+            lines = arg.split()
+            if len(lines) > 0:
+                class_name = lines[0]
                 if class_name in allowed_classes:
                     final_list = []
                     for key, value in models.storage.all().items():
@@ -166,23 +166,23 @@ class HBNBCommand(cmd.Cmd):
                 "BaseModel", "User", "State",
                 "City", "Amenity", "Place", "Review"]
         if len(arg) > 0:
-            args_array = arg.split()
-            if len(args_array) > 0:
-                class_name = args_array[0]
+            lines = arg.split()
+            if len(lines) > 0:
+                class_name = lines[0]
                 if class_name in allowed_classes:
-                    if len(args_array) > 1:
+                    if len(lines) > 1:
                         objs_dict = models.storage.all()
                         search_string = "{}.{}".format(
-                                class_name, args_array[1])
+                                class_name, lines[1])
                         if search_string in objs_dict:
-                            if len(args_array) > 2:
-                                if len(args_array) > 3:
-                                    if (args_array[3]
+                            if len(lines) > 2:
+                                if len(lines) > 3:
+                                    if (lines[3]
                                             not in
                                             ["created_at",
                                                 "updated_at", "id"]):
                                         setattr(objs_dict[search_string], str(
-                                            args_array[2]), str(args_array[3]))
+                                            lines[2]), str(lines[3]))
                                 else:
                                     print("** value missing **")
                             else:
@@ -255,19 +255,19 @@ class HBNBCommand(cmd.Cmd):
         update_regex = re.compile(r"\.update\(\"(.*?)\", \"(.*?)\", (.*?)\)")
         update_dict_regex = re.compile(r"\.update\(\"(.*?)\",(.*?)\)")
         if len(arg) > 0:
-            args_array = arg.split()
-            if len(args_array) > 0:
-                command_method = args_array[0]
+            lines = arg.split()
+            if len(lines) > 0:
+                command_method = lines[0]
                 if command_method in allowed_methods:
                     if command_method == ".all()":
                         self.do_all(class_name)
                     if command_method == ".count()":
                         self.get_count(class_name)
-                elif (show_regex.search(args_array[0]) is not None):
-                    obj_id = show_regex.search(args_array[0]).group(1)
+                elif (show_regex.search(lines[0]) is not None):
+                    obj_id = show_regex.search(lines[0]).group(1)
                     self.do_show("{} {}".format(class_name, obj_id))
-                elif (delete_regex.search(args_array[0]) is not None):
-                    obj_id = delete_regex.search(args_array[0]).group(1)
+                elif (delete_regex.search(lines[0]) is not None):
+                    obj_id = delete_regex.search(lines[0]).group(1)
                     self.do_destroy("{} {}".format(class_name, obj_id))
                 elif (update_regex.search(arg) is not None):
                     obj_id = update_regex.search(arg).group(1)
