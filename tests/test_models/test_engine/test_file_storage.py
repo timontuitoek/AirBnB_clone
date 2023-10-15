@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-import modules
+module docs
 """
 import unittest
 import models
@@ -24,7 +24,7 @@ class TestFileStorage(unittest.TestCase):
 
     def tearDown(self):
         """
-        tear down test after it finishes
+        close test after it finishes
         """
         if os.path.exists(self.storage._FileStorage__file_path):
             os.remove(self.storage._FileStorage__file_path)
